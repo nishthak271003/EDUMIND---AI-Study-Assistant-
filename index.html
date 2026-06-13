@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMind – AI Study Assistant</title> <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" /> <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+</head>
+<body>
+  <script>
+  AOS.init();
+</script>
+
+  <body style="background: url('background.jpg') no-repeat center center; background-size: cover;">
+
+  <header class="navbar">
+    <div class="logo"></div>
+    <img class="top-left-image" src= "edumind.png" alt="logo"> 
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="features.html">Features</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="slide-in-left">Smarter Learning Simplified . </h1>
+      <p>Upload. Summarize. Learn. Quiz. With EduMind, studying has never been this easy. 📘✨</p>
+      <a href="login.html" class="btn">Login</a>
+      <br>
+      <!-- Button with class 'btn' -->
+      <button class="btn1" onclick="document.querySelector('.products').scrollIntoView({ behavior: 'smooth' });">
+    Try Demo 
+</button>
+
+    </div>
+  </section>
+  
+  <section class="products">
+    <h2 >Core Features</h2>
+
+    <div class="feature-pair">
+        <div class="product-card upload-card">
+            <img src="upload2.png" alt="Upload" />
+            <h3>Upload & Summarize</h3>
+            <p data-aos="zoom-in">Instantly generate concise summaries from documents or videos.</p>
+            <button class="btn" onclick="window.location.href='frontend/upload.html'">Upload Now</button>
+            <input type="file" id="fileInput" accept=".pdf,.docx,.txt" style="display:none;" />
+        </div>
+
+        <div class="feature-video-container">
+            <video id="upl-demo-vid" controls muted autoplay loop>
+                <source src="videos/uplovideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>Watch a quick demo!</p>
+        </div>
+    </div>
+    
+    <div class="feature-pair">
+        <div class="product-card notes-card">
+            <img src="notes2.png" alt="Notes" />
+            <h3>Study Notes</h3>
+            <p data-aos="zoom-in">Get clean, structured notes to revise faster and smarter.</p>
+            <button class="btn" onclick="window.location.href='notes.html'">Generate Notes</button>
+            <input type="file" id="fileInput" accept=".pdf,.docx,.txt" style="display:none;" />
+        </div>
+        
+        <div class="feature-video-container">
+            <video id="notes-demo-vid" controls muted autoplay loop>
+                <source src="videos/notevideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>See how notes are generated!</p>
+        </div>
+    </div>
+    
+    <div class="feature-pair">
+        <div class="product-card quiz-card">
+            <img src="quiz2.png" alt="Quiz" />
+            <h3>Practice Quizzes</h3>
+            <p data-aos="zoom-in">Test your knowledge with AI-generated MCQs & practice tests.</p>
+            <button class="btn" onclick="window.location.href='quiz.html'">Take Quiz</button>
+            <input type="file" id="fileInput" accept=".pdf,.docx,.txt" style="display:none;" />
+        </div>
+        
+        <div class="feature-video-container">
+              <video id="quiz-demo-vid" controls muted autoplay loop>
+                <source src="videos/quizvideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>Test drive the quiz maker!</p>
+        </div>
+    </div>
+</section>
+  </section>
+
+
+  <!-- Footer -->
+  <footer id="about">
+    <p>© 2025 EduMind | AI-Powered Study Assistant</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

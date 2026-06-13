@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    /* Import Google Font */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(180deg, #4d1f91, #5a3abf, #7a52c4);
+      overflow: hidden;
+    }
+
+    /* Background stars */
+    body::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url("back.jpg");
+      background-size: cover;
+      opacity: 0.4;
+    }
+
+    .login-box {
+      position: relative;
+      width: 350px;
+      padding: 40px;
+      /* fallback glass effect */
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      z-index: 10;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .input-box {
+      position: relative;
+      margin: 15px 0;
+      width: 100%;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 12px 40px 12px 15px;
+      border: none;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      outline: none;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .input-box input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .input-box i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #fff;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin: 10px 0 20px;
+      color: #fff;
+    }
+
+    .options input {
+      margin-right: 5px;
+    }
+
+    .options a {
+      color: #fff;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .options a:hover {
+      text-decoration: underline;
+    }
+
+    .btn3 {
+      width: 100%;
+      padding: 12px;
+      background: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      color: #4d1f91;
+      transition: 0.3s;
+    }
+
+    .btn3:hover {
+      background: #ddd;
+    }
+
+    .register {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .register a {
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .register a:hover {
+      text-decoration: underline;
+    }
+
+    /* Error highlight */
+    .error {
+      border: 2px solid #ff4d4d;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <div class="input-box">
+        <input type="text" id="username" placeholder="Username">
+        <i class="fas fa-user"></i>
+      </div>
+      <div class="input-box">
+        <input type="password" id="password" placeholder="Password">
+        <i class="fas fa-lock"></i>
+      </div>
+      <div class="options">
+        <label><input type="checkbox"> Remember me</label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn3">Login</button>
+      <div class="register">
+        Do not have an account? <a href="register.html">Register</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- FontAwesome for icons -->
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
+  <script src="api.js"></script>
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent actual form submit
+
+    let usernameInput = document.getElementById("username");
+    let passwordInput = document.getElementById("password");
+
+    let username = usernameInput.value.trim();
+    let password = passwordInput.value.trim();
+
+    // Reset error state
+    usernameInput.classList.remove("error");
+    passwordInput.classList.remove("error");
+
+    if (!username || !password) {
+        if (!username) usernameInput.classList.add("error");
+        if (!password) passwordInput.classList.add("error");
+        alert("Please fill in both Username and Password!");
+        return;
+    }
+
+    // Send login request to Flask API
+    fetch("http://127.0.0.1:5000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: username, password: password }),
+        credentials: "include"  // important to store session cookies
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.message === "Login successful") {
+            alert("Login successful ✅");
+            window.location.href = "dashboard.html"; // change to your main page
+        } else {
+            alert("Login failed: " + (data.error || "Unknown error"));
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Login failed: " + err.message);
+    });
+});
+</script>
+
+</body>
+</html>
